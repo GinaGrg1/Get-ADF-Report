@@ -20,7 +20,7 @@ def get_etl_tracker_file(download_path: str, file_url: str) -> None:
     
   print(f"\nFile downloaded : {download_path}")
   
-  def get_columns(all_columns: list) -> list:
+def get_columns(all_columns: list) -> list:
   tmp_cols = dict()
   for column in all_columns:
     first_part = column[0]
