@@ -150,7 +150,8 @@ class PipelineActivities:
     This response object contains all pipeline run information. If there are re-runs, for e.g 6 times, then it will loop 
     through each run_id and grab the duration_in_ms.
     """
-    runtime_in_ms = sum([run.duration_in_ms for run in response.value if run.duration_in_ms])
+    runtime_in_ms = sum([run.duration_in_ms for run in response.value if run.additional_properties.get('annotations') == self.annotations 
+                                                      and run.parameters.get('fileName') == self.filename and run.duration_in_ms])
     return self.convert_ms(runtime_in_ms)
   
   def pipeline_run(self) -> Tuple[int, str, List[Dict[str, str]]]:
