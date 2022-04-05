@@ -283,5 +283,8 @@ if __name__ == '__main__':
   table_template = load_table_template(".../adf_table_template.html", run_id, pipeline_name, runtime)
   final_output = table_template.replace('{html_rows}', create_html_rows(activities_runs_final))
   
-  dbutils.notebook.exit({'result': final_output})
+  #dbutils.notebook.exit({'result': final_output})
+  
+  client_api = dbutils.secret.get(scope=current_scope, key='some-key')
+  send_email(client_api=client_api, subject=getArgument('subject'), output=final_output)
   
